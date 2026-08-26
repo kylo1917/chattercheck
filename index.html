@@ -1,0 +1,308 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChatterCheck Early Access</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg: oklch(98% 0.006 80);
+  --surface: oklch(99% 0.003 80);
+  --surface-2: oklch(96% 0.007 80);
+  --border: oklch(90% 0.01 260);
+  --border-soft: oklch(93% 0.008 260);
+  --text: oklch(24% 0.02 260);
+  --text-2: oklch(46% 0.02 260);
+  --text-3: oklch(60% 0.015 260);
+  --accent: #3f8c80;
+  --accent-ink: oklch(32% 0.07 175);
+  --accent-tint: oklch(94% 0.03 175);
+  --accent-strong: oklch(46% 0.09 175);
+  --good: oklch(52% 0.13 145);
+  --good-tint: oklch(94% 0.035 145);
+  --warn: oklch(58% 0.13 80);
+  --cat-grammar: oklch(52% 0.13 260); --cat-grammar-tint: oklch(94% 0.02 260);
+  --cat-vocab: oklch(52% 0.14 330);   --cat-vocab-tint: oklch(94% 0.025 330);
+  --cat-pron: oklch(55% 0.14 75);     --cat-pron-tint: oklch(94% 0.03 75);
+  --cat-usage: oklch(53% 0.15 20);    --cat-usage-tint: oklch(94% 0.03 20);
+  --shadow-sm: 0 1px 2px oklch(20% 0.02 260 / 0.06);
+  --shadow-md: 0 4px 16px oklch(20% 0.02 260 / 0.07), 0 1px 3px oklch(20% 0.02 260 / 0.06);
+  --shadow-lg: 0 24px 60px oklch(20% 0.02 260 / 0.14), 0 4px 14px oklch(20% 0.02 260 / 0.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg: oklch(21% 0.015 260); --surface: oklch(25% 0.015 260); --surface-2: oklch(28% 0.017 260);
+    --border: oklch(37% 0.02 260); --border-soft: oklch(32% 0.018 260);
+    --text: oklch(94% 0.006 80); --text-2: oklch(76% 0.012 260); --text-3: oklch(62% 0.012 260);
+    --accent: #5fb3a5; --accent-ink: oklch(90% 0.05 175); --accent-tint: oklch(32% 0.06 175); --accent-strong: oklch(74% 0.1 175);
+    --good: oklch(72% 0.14 145); --good-tint: oklch(32% 0.06 145);
+    --warn: oklch(76% 0.12 80);
+    --cat-grammar: oklch(76% 0.1 260); --cat-grammar-tint: oklch(30% 0.05 260);
+    --cat-vocab: oklch(76% 0.11 330); --cat-vocab-tint: oklch(30% 0.06 330);
+    --cat-pron: oklch(78% 0.11 75); --cat-pron-tint: oklch(32% 0.06 75);
+    --cat-usage: oklch(76% 0.12 20); --cat-usage-tint: oklch(32% 0.06 20);
+    --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3); --shadow-md: 0 4px 16px oklch(0% 0 0 / 0.35); --shadow-lg: 0 24px 60px oklch(0% 0 0 / 0.5), 0 4px 14px oklch(0% 0 0 / 0.3);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg: oklch(21% 0.015 260); --surface: oklch(25% 0.015 260); --surface-2: oklch(28% 0.017 260);
+  --border: oklch(37% 0.02 260); --border-soft: oklch(32% 0.018 260);
+  --text: oklch(94% 0.006 80); --text-2: oklch(76% 0.012 260); --text-3: oklch(62% 0.012 260);
+  --accent: #5fb3a5; --accent-ink: oklch(90% 0.05 175); --accent-tint: oklch(32% 0.06 175); --accent-strong: oklch(74% 0.1 175);
+  --good: oklch(72% 0.14 145); --good-tint: oklch(32% 0.06 145);
+  --warn: oklch(76% 0.12 80);
+  --cat-grammar: oklch(76% 0.1 260); --cat-grammar-tint: oklch(30% 0.05 260);
+  --cat-vocab: oklch(76% 0.11 330); --cat-vocab-tint: oklch(30% 0.06 330);
+  --cat-pron: oklch(78% 0.11 75); --cat-pron-tint: oklch(32% 0.06 75);
+  --cat-usage: oklch(76% 0.12 20); --cat-usage-tint: oklch(32% 0.06 20);
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3); --shadow-md: 0 4px 16px oklch(0% 0 0 / 0.35); --shadow-lg: 0 24px 60px oklch(0% 0 0 / 0.5), 0 4px 14px oklch(0% 0 0 / 0.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;line-height:1.55}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-0.01em}
+p{margin:0}
+a{color:var(--accent-strong)}
+img{max-width:100%}
+::selection{background:var(--accent-tint)}
+:focus-visible{outline:2px solid var(--accent-strong);outline-offset:2px;border-radius:4px}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.narrow{max-width:680px}
+
+nav.topnav{display:flex;align-items:center;gap:10px;padding:20px 0}
+.mark{width:32px;height:32px;border-radius:9px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:800;letter-spacing:-0.03em;font-family:'IBM Plex Mono',monospace;flex:0 0 auto}
+.navname{font-weight:700;font-size:15px}
+.navcta{margin-left:auto;display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:9px;background:var(--accent);color:white;font-weight:600;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.navcta:hover{opacity:.92}
+
+.hero{padding:64px 0 88px;display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center}
+@media (max-width:880px){.hero{grid-template-columns:1fr;padding:36px 0 56px;gap:40px}}
+.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-tint);padding:6px 12px;border-radius:100px;margin-bottom:20px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent-strong)}
+h1.headline{font-size:clamp(34px,4.6vw,52px);font-weight:800;line-height:1.06}
+h1.headline em{font-style:normal;color:var(--accent-strong)}
+.sub{font-size:18px;color:var(--text-2);margin-top:18px;max-width:52ch}
+.herobtns{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:11px;font-weight:600;font-size:15px;border:1px solid var(--border)}
+.btn-primary{background:var(--accent);color:white;border-color:var(--accent);box-shadow:var(--shadow-md)}
+.btn-primary:hover{opacity:.93}
+.btn-ghost{background:transparent;color:var(--text)}
+.btn-ghost:hover{background:var(--surface-2)}
+.herofine{font-size:12.5px;color:var(--text-3);margin-top:12px}
+
+/* hero mockup: reproduces the actual product's card language */
+.mock{position:relative}
+.mockcard{position:relative;z-index:1;background:var(--surface);border:1px solid var(--border-soft);border-radius:16px;box-shadow:var(--shadow-lg);padding:20px 22px;transform:rotate(-1.2deg)}
+.mockrow{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.mockname{font-weight:700;font-size:14.5px}
+.mockmeta{font-size:11.5px;color:var(--text-3);margin-top:2px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:700;letter-spacing:.02em;padding:3px 8px;border-radius:100px}
+.mistakecard{border-radius:11px;padding:12px 13px;display:flex;flex-direction:column;gap:6px;border:1px solid color-mix(in oklch, var(--warn) 40%, var(--border-soft));background:var(--surface);margin-bottom:10px}
+.mccount{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:700;padding:3px 7px;border-radius:100px;background:var(--warn);color:white}
+.mctxt{font-size:13px}
+.mcfix{font-size:11.5px;color:var(--text-2)}
+.statmini{display:flex;gap:10px;margin-top:14px}
+.statbox{flex:1;background:var(--surface-2);border-radius:9px;padding:9px 11px}
+.statnum{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:700}
+.statlbl{font-size:10px;color:var(--text-2)}
+.floatcard{position:absolute;z-index:2;background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;box-shadow:var(--shadow-md);padding:10px 13px;font-size:11.5px;font-weight:600;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.floatcard .livedot{width:6px;height:6px;border-radius:50%;background:#e05d5d}
+.fc1{top:-16px;right:6%;transform:rotate(2deg)}
+.fc2{bottom:-14px;left:2%;transform:rotate(-2deg);color:var(--accent-ink);background:var(--accent-tint);border-color:transparent}
+@media (max-width:880px){.mockcard{transform:none}.floatcard{display:none}}
+
+section{padding:64px 0;border-top:1px solid var(--border-soft)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--accent-ink)}
+.sectitle{font-size:clamp(24px,3vw,32px);font-weight:800;margin-top:10px}
+.secsub{color:var(--text-2);margin-top:12px;font-size:16px}
+
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-top:8px}
+@media (max-width:780px){.problem-grid{grid-template-columns:1fr}}
+.problem-grid p{color:var(--text-2);font-size:16px}
+.problem-grid p+p{margin-top:14px}
+.founder{font-size:14px;color:var(--text-3);margin-top:16px;padding-top:16px;border-top:1px dashed var(--border-soft)}
+
+.featgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+@media (max-width:880px){.featgrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.featgrid{grid-template-columns:1fr}}
+.feat{background:var(--surface);border:1px solid var(--border-soft);border-radius:14px;padding:22px 20px;box-shadow:var(--shadow-sm)}
+.feat .fnum{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;color:var(--accent-strong)}
+.feat h3{font-size:16px;margin-top:10px}
+.feat p{font-size:14px;color:var(--text-2);margin-top:8px}
+
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:40px;position:relative}
+@media (max-width:820px){.steps{grid-template-columns:1fr;gap:24px}}
+.step{position:relative;padding:0 16px 0 0}
+.step:first-child{padding-left:0}
+.stepnum{width:34px;height:34px;border-radius:50%;background:var(--accent-tint);color:var(--accent-ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;font-family:'IBM Plex Mono',monospace}
+.step h3{font-size:15.5px;margin-top:12px}
+.step p{font-size:13.5px;color:var(--text-2);margin-top:6px}
+.stepline{position:absolute;top:17px;left:34px;right:-16px;height:1px;background:var(--border)}
+@media (max-width:820px){.stepline{display:none}}
+
+.pricewrap{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:36px}
+@media (max-width:780px){.pricewrap{grid-template-columns:1fr}}
+.pricecard{background:var(--surface);border:1px solid var(--border-soft);border-radius:16px;padding:28px 26px;box-shadow:var(--shadow-sm)}
+.pricecard.hi{border-color:var(--accent-strong);box-shadow:var(--shadow-md);position:relative}
+.pricetag{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent-tint);padding:4px 10px;border-radius:100px;display:inline-block;margin-bottom:14px}
+.priceamt{font-size:30px;font-weight:800}
+.priceamt .per{font-size:14px;font-weight:500;color:var(--text-3)}
+.pricecard ul{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.pricecard li{font-size:14px;color:var(--text-2);display:flex;gap:8px;align-items:flex-start}
+.pricecard li::before{content:'✓';color:var(--good);font-weight:700;flex:0 0 auto}
+
+.faq{margin-top:32px;display:flex;flex-direction:column;gap:0}
+.faqitem{border-top:1px solid var(--border-soft);padding:20px 0}
+.faqitem:first-child{border-top:none}
+.faqq{font-weight:600;font-size:15.5px}
+.faqa{font-size:14.5px;color:var(--text-2);margin-top:8px;max-width:62ch}
+
+.cta{text-align:center;padding:72px 0}
+.cta h2{font-size:clamp(26px,3.4vw,36px);font-weight:800}
+.cta p{color:var(--text-2);margin-top:12px;font-size:16px}
+.cta .herobtns{justify-content:center;margin-top:26px}
+
+footer{border-top:1px solid var(--border-soft);padding:32px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+footer .fbrand{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-3)}
+footer a{color:var(--text-3);font-size:13px}
+.disclaim{font-size:12px;color:var(--text-3);max-width:640px;margin-top:8px}
+</style>
+
+<nav class="topnav wrap">
+  <div class="mark">CC</div>
+  <div class="navname">ChatterCheck</div>
+  <a class="navcta" href="https://kylo1917.github.io/lesson-copilot/" target="_blank" rel="noopener">Try it free</a>
+</nav>
+
+<header class="hero wrap">
+  <div>
+    <span class="eyebrow"><span class="dot"></span>Built by a working language tutor</span>
+    <h1 class="headline">You teach.<br>It <em>remembers</em>.</h1>
+    <p class="sub">ChatterCheck sits beside your call, quietly transcribes the lesson, and flags what your student keeps getting wrong — so class time stays about the lesson, not your notes.</p>
+    <div class="herobtns">
+      <a class="btn btn-primary" href="https://kylo1917.github.io/lesson-copilot/" target="_blank" rel="noopener">Try it free →</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="herofine">Free during beta · works alongside Preply, italki, or any video call · nothing stored on a server · <a href="mailto:kyle@hatting.co.za?subject=ChatterCheck%20—%20a%20question&body=Hi%20Kyle%2C%0A%0A">questions? email me</a></p>
+  </div>
+  <div class="mock">
+    <div class="floatcard fc1"><span class="livedot"></span>Recording — listening</div>
+    <div class="mockcard">
+      <div class="mockrow">
+        <div>
+          <div class="mockname">Elena Kowalski</div>
+          <div class="mockmeta">Spanish · B1 · 6 sessions</div>
+        </div>
+        <span class="pill" style="background:var(--cat-grammar-tint);color:var(--cat-grammar)">Grammar</span>
+      </div>
+      <div class="mistakecard">
+        <div style="display:flex;justify-content:space-between"><span class="mono" style="font-size:10.5px;color:var(--text-3)">RECURRING</span><span class="mccount">×3</span></div>
+        <div class="mctxt">"soy cansada"</div>
+        <div class="mcfix">→ estoy cansada</div>
+      </div>
+      <div class="statmini">
+        <div class="statbox"><div class="statnum">82%</div><div class="statlbl">Current average</div></div>
+        <div class="statbox"><div class="statnum">+6%</div><div class="statlbl">vs last session</div></div>
+      </div>
+    </div>
+    <div class="floatcard fc2">✓ Flagged only once it repeated</div>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="problem-grid">
+    <div>
+      <span class="kicker">The problem</span>
+      <h2 class="sectitle">Typing while you teach doesn't work.</h2>
+    </div>
+    <div>
+      <p>You're mid-sentence with a student, and you notice the same mistake they made last week. Do you stop to write it down? Try to remember it for later? Most tutors just let it go — and the pattern never gets addressed.</p>
+      <p>ChatterCheck was built to fix exactly that: it listens, builds the transcript for you, and only surfaces something once it's actually worth your attention — a mistake that's repeated, not a one-off slip.</p>
+      <p class="founder">I built this for my own Preply lessons because I needed it myself. It's currently in beta — early users get a say in what we build next.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="kicker">What it does</span>
+  <h2 class="sectitle">Everything a tutor actually needs, nothing you don't</h2>
+  <div class="featgrid">
+    <div class="feat"><div class="fnum">01</div><h3>Live transcript, zero typing</h3><p>Turn on recording and just teach. The transcript builds itself in the background using your browser's built-in speech recognition.</p></div>
+    <div class="feat"><div class="fnum">02</div><h3>Flags only what repeats</h3><p>A slip doesn't interrupt you. A pattern does. Mistakes only surface once they've actually happened more than once.</p></div>
+    <div class="feat"><div class="fnum">03</div><h3>A file per student</h3><p>Progression chart, corrections with context, and a vocabulary glossary — split into idioms, phrasal verbs, collocations and metaphors — all built automatically.</p></div>
+    <div class="feat"><div class="fnum">04</div><h3>Review on your own time</h3><p>Nothing forces you to tag mistakes mid-lesson. Come back to it that evening, or next week — the transcript keeps.</p></div>
+    <div class="feat"><div class="fnum">05</div><h3>Students practice on their own</h3><p>A simplified link — no login, no install — where students review their glossary and drill it with built-in flashcards.</p></div>
+    <div class="feat"><div class="fnum">06</div><h3>Private by design</h3><p>No server, no student accounts, no data anyone else can see. Everything lives in the browser it was created in.</p></div>
+  </div>
+</section>
+
+<section class="wrap" id="how">
+  <span class="kicker">How it works</span>
+  <h2 class="sectitle">Four steps, most of which you don't do</h2>
+  <div class="steps">
+    <div class="step"><div class="stepline"></div><div class="stepnum">01</div><h3>Record</h3><p>Click start at the beginning of the lesson. Teach normally.</p></div>
+    <div class="step"><div class="stepline"></div><div class="stepnum">02</div><h3>Review</h3><p>Whenever you have a spare minute, tag what's worth keeping.</p></div>
+    <div class="step"><div class="stepline"></div><div class="stepnum">03</div><h3>Track</h3><p>Every session updates a per-student progression chart automatically.</p></div>
+    <div class="step"><div class="stepline"></div><div class="stepnum">04</div><h3>Share</h3><p>Send your student their own file — progress, corrections, flashcards.</p></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="kicker">Early access</span>
+  <h2 class="sectitle">Free in beta. Simple pricing when it launches.</h2>
+  <p class="secsub">ChatterCheck is still being shaped by the tutors using it. Join now and it's free — plus you lock in early-supporter pricing for whenever a paid version ships.</p>
+  <div class="pricewrap">
+    <div class="pricecard">
+      <span class="pricetag">Beta — today</span>
+      <div class="priceamt">Free</div>
+      <ul>
+        <li>Full tool, no limits</li>
+        <li>Your own hosted copy</li>
+        <li>Direct line to shape new features</li>
+        <li>No credit card, no account</li>
+      </ul>
+    </div>
+    <div class="pricecard hi">
+      <span class="pricetag">Planned — at launch</span>
+      <div class="priceamt">TBA <span class="per">· one-time, not a subscription</span></div>
+      <ul>
+        <li>Everything in beta, refined</li>
+        <li>Early access members get founder pricing</li>
+        <li>Setup help if you're not technical</li>
+        <li>Priority on new feature requests</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <span class="kicker">Questions</span>
+  <h2 class="sectitle">Before you ask</h2>
+  <div class="faq">
+    <div class="faqitem"><div class="faqq">Is this affiliated with Preply?</div><div class="faqa">No — it's an independent tool built by a tutor. It runs alongside any video call, Preply included, but it isn't made or endorsed by Preply.</div></div>
+    <div class="faqitem"><div class="faqq">Is my students' data safe?</div><div class="faqa">It never leaves the browser it's created in — there's no server storing it, and no account required to use it. You're responsible for letting students know if a session is being recorded, same as with any recording tool.</div></div>
+    <div class="faqitem"><div class="faqq">What do I need to run it?</div><div class="faqa">Any modern browser works for reviewing files and tracking progress. Live recording currently needs Chrome, since it uses Chrome's built-in speech recognition.</div></div>
+    <div class="faqitem"><div class="faqq">Do my students need to sign up for anything?</div><div class="faqa">No. They open a link — no account, no install, no login, ever.</div></div>
+    <div class="faqitem"><div class="faqq">What happens after I join early access?</div><div class="faqa">You'll hear back directly to get set up, and get a say in what gets built next before it locks in as a paid product.</div></div>
+  </div>
+</section>
+
+<section class="cta wrap" style="border-top:none">
+  <h2>Teach. Don't transcribe.</h2>
+  <p>Free during beta. Takes two minutes to get set up.</p>
+  <div class="herobtns">
+    <a class="btn btn-primary" href="https://kylo1917.github.io/lesson-copilot/" target="_blank" rel="noopener">Try it free →</a>
+    <a class="btn btn-ghost" href="mailto:kyle@hatting.co.za?subject=ChatterCheck%20—%20a%20question&body=Hi%20Kyle%2C%0A%0A">Email me instead</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div>
+    <div class="fbrand"><div class="mark" style="width:22px;height:22px;font-size:9px;border-radius:6px">CC</div>ChatterCheck</div>
+    <p class="disclaim">Independent tool built by a language tutor. Not affiliated with, endorsed by, or connected to Preply or any other tutoring platform.</p>
+  </div>
+  <a href="mailto:kyle@hatting.co.za">kyle@hatting.co.za</a>
+</footer>
