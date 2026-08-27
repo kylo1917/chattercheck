@@ -1,0 +1,152 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChatterCheck — Privacy &amp; Terms</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  color-scheme:light;
+  --bg: oklch(98% 0.006 80);
+  --surface: oklch(99% 0.003 80);
+  --surface-2: oklch(96% 0.007 80);
+  --border: oklch(90% 0.01 260);
+  --border-soft: oklch(93% 0.008 260);
+  --text: oklch(24% 0.02 260);
+  --text-2: oklch(46% 0.02 260);
+  --text-3: oklch(60% 0.015 260);
+  --accent: #3f8c80;
+  --accent-ink: oklch(32% 0.07 175);
+  --accent-tint: oklch(94% 0.03 175);
+  --accent-strong: oklch(46% 0.09 175);
+  --warn: oklch(58% 0.13 80);
+  --warn-tint: oklch(94% 0.03 80);
+  --shadow-sm: 0 1px 2px oklch(20% 0.02 260 / 0.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg: oklch(21% 0.015 260); --surface: oklch(25% 0.015 260); --surface-2: oklch(28% 0.017 260);
+    --border: oklch(37% 0.02 260); --border-soft: oklch(32% 0.018 260);
+    --text: oklch(94% 0.006 80); --text-2: oklch(76% 0.012 260); --text-3: oklch(62% 0.012 260);
+    --accent: #5fb3a5; --accent-ink: oklch(90% 0.05 175); --accent-tint: oklch(32% 0.06 175); --accent-strong: oklch(74% 0.1 175);
+    --warn: oklch(76% 0.12 80); --warn-tint: oklch(32% 0.06 80);
+    --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg: oklch(21% 0.015 260); --surface: oklch(25% 0.015 260); --surface-2: oklch(28% 0.017 260);
+  --border: oklch(37% 0.02 260); --border-soft: oklch(32% 0.018 260);
+  --text: oklch(94% 0.006 80); --text-2: oklch(76% 0.012 260); --text-3: oklch(62% 0.012 260);
+  --accent: #5fb3a5; --accent-ink: oklch(90% 0.05 175); --accent-tint: oklch(32% 0.06 175); --accent-strong: oklch(74% 0.1 175);
+  --warn: oklch(76% 0.12 80); --warn-tint: oklch(32% 0.06 80);
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.3);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;line-height:1.6}
+.mono{font-family:'IBM Plex Mono',ui-monospace,monospace}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-0.01em}
+p,ul{margin:0}
+a{color:var(--accent-strong)}
+::selection{background:var(--accent-tint)}
+
+.wrap{max-width:720px;margin:0 auto;padding:0 24px}
+nav.topnav{display:flex;align-items:center;gap:10px;padding:20px 0;border-bottom:1px solid var(--border-soft);margin-bottom:40px}
+.mark{width:30px;height:30px;border-radius:8px;background:var(--accent);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:800;font-family:'IBM Plex Mono',monospace;flex:0 0 auto}
+.navname{font-weight:700;font-size:15px}
+
+header{padding-bottom:32px}
+h1{font-size:clamp(26px,4vw,34px);font-weight:800}
+.updated{color:var(--text-3);font-size:13.5px;margin-top:10px}
+
+section{padding:36px 0;border-top:1px solid var(--border-soft)}
+h2{font-size:19px;font-weight:700;margin-bottom:14px}
+h3{font-size:15.5px;font-weight:700;margin:20px 0 8px}
+p{color:var(--text-2);font-size:15px}
+p+p{margin-top:12px}
+ul{color:var(--text-2);font-size:15px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+li strong{color:var(--text)}
+
+.callout{background:var(--accent-tint);border:1px solid color-mix(in oklch, var(--accent-strong) 25%, var(--border-soft));border-radius:12px;padding:16px 18px;margin:16px 0}
+.callout p{color:var(--accent-ink);font-size:14px}
+.warncallout{background:var(--warn-tint);border:1px solid color-mix(in oklch, var(--warn) 30%, var(--border-soft));border-radius:12px;padding:16px 18px;margin:16px 0}
+.warncallout p{color:var(--text);font-size:14px}
+
+footer{padding:32px 0;color:var(--text-3);font-size:13px}
+</style>
+
+<nav class="topnav wrap">
+  <div class="mark">CC</div>
+  <div class="navname">ChatterCheck</div>
+</nav>
+
+<div class="wrap">
+  <header>
+    <h1>Privacy &amp; Terms</h1>
+    <p class="updated">Last updated 27 August 2026</p>
+  </header>
+
+  <section style="border-top:none;padding-top:0">
+    <h2>The short version</h2>
+    <div class="callout">
+      <p>ChatterCheck has no server that stores your data. Everything — student records, mistake history, vocabulary, progress — lives only in your browser and your students' browsers. We can't see it, sell it, or lose it in a breach, because we never have it.</p>
+    </div>
+    <p>The rest of this page explains that in detail, plus the couple of places where a third-party service is involved.</p>
+  </section>
+
+  <section>
+    <h2>What data exists, and where it lives</h2>
+    <h3>The core app — students, mistakes, glossary, progress</h3>
+    <p>Stored only in your browser's local storage on your device. Nothing is transmitted to or stored on any server we operate. When you export a file or share a link with a student, that's a manual action you take — we're not automatically syncing or copying anything.</p>
+
+    <h3>Live transcription (default)</h3>
+    <p>Uses Chrome's built-in speech recognition to turn speech into text during a session. That audio is processed by Google as part of the browser feature itself — it's not something ChatterCheck's own infrastructure touches, sees, or stores.</p>
+
+    <h3>Speaker-separated transcription (optional)</h3>
+    <p>Off by default. If you turn it on and provide your own NVIDIA API key, short audio clips from your session are sent through a small relay we operate to NVIDIA's speech service, purely to tell your voice apart from your student's. That relay does not log or store anything — it forwards the audio, gets a result, and returns it. Turning this feature on is your choice, and it requires your own account with NVIDIA.</p>
+
+    <h3>Student self-recording / practice</h3>
+    <p>Any recording a student makes of their own voice for pronunciation practice exists only in that browser tab for the moment of playback, and is never saved anywhere.</p>
+
+    <div class="callout">
+      <p>We do not run analytics, tracking scripts, or advertising on this app.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Recording consent</h2>
+    <div class="warncallout">
+      <p>You are responsible for getting your student's consent before recording a session, in line with the laws where you and your student are located — some places require everyone in the conversation to agree, not just you. The app asks you to confirm this before recording starts, but the legal responsibility for actually obtaining that consent is yours.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Third-party services involved</h2>
+    <ul>
+      <li><strong>Google</strong> — Chrome's built-in speech recognition, used for default live transcription.</li>
+      <li><strong>NVIDIA</strong> — speech AI used only if you opt into speaker-separated transcription, using your own API key.</li>
+      <li><strong>GitHub Pages</strong> — hosts this app as static files.</li>
+      <li><strong>Vercel</strong> — hosts the optional relay used only for the speaker-separation feature.</li>
+    </ul>
+    <p>None of these services receive anything from you unless you're actively using the specific feature that requires them.</p>
+  </section>
+
+  <section>
+    <h2>Terms of use</h2>
+    <ul>
+      <li>ChatterCheck is provided as-is, with no warranty of any kind. You're responsible for how you use it, including verifying it fits your local laws around recording and student data.</li>
+      <li>It's an independent tool, not affiliated with, endorsed by, or connected to Preply or any other tutoring platform.</li>
+      <li>Don't use it to collect or store more personal information about a student than you need for tutoring purposes.</li>
+      <li>Currently free to use. If a paid version launches, payment will go through a third-party processor (such as Stripe) — we will never directly handle or store your card details ourselves.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>If how the app handles data changes, this page will be updated and the date at the top will reflect that. Meaningful changes (like a new feature that changes what leaves your device) will be called out directly in the app, not just buried here.</p>
+  </section>
+
+  <footer class="wrap" style="padding-left:0;padding-right:0">
+    Questions? <a href="mailto:kyle@hatting.co.za">kyle@hatting.co.za</a>
+  </footer>
+</div>
